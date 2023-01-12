@@ -1,8 +1,11 @@
+import { useFilterContext } from "../context/filter_context";
 import { useProductsContext } from "../context/products_context";
 import Product from "./Product";
 
 const ProductsList = () => {
-    const { products, post, loadMore } = useProductsContext();
+    const {filtered_products: products} = useFilterContext();
+    const { post, loadMore } = useProductsContext();
+    
     return (
         <section className="products-list-wrapper">
             <div className="products-list">

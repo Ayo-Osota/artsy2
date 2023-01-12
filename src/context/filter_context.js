@@ -5,6 +5,14 @@ import {
   UPDATE_SORT,
   SORT_PRODUCTS,
   UPDATE_FILTERS,
+  SHOW_CATEGORY_FILTERS,
+  SHOW_PRICE_FILTERS,
+  SHOW_ARTIST_FILTERS,
+  SHOW_YEAR_FILTERS,
+  HIDE_CATEGORY_FILTERS,
+  HIDE_PRICE_FILTERS,
+  HIDE_ARTIST_FILTERS,
+  HIDE_YEAR_FILTERS,
   FILTER_PRODUCTS
 } from '../actions'
 import { useProductsContext } from './products_context'
@@ -15,8 +23,12 @@ const initialState = {
   all_products: [],
   grid_view: true,
   sort: "price-lowest",
+  show_category_filters: true,
+  show_price_filters: true,
+  show_artist_filters: true,
+  show_year_filters: true,
   filters: {
-    name: "",
+    text: "",
     category: "all",
     min_price: 0,
     max_price: 0,
@@ -42,22 +54,59 @@ export const FilterProvider = ({ children }) => {
     if (name === "price") {
       value = Number(value)
     }
-    dispatch({ type: UPDATE_FILTERS, payload: { name, value } })
+    dispatch({ type: UPDATE_FILTERS, payload: { name, value } });
   }
-  
+
+  const toggleCategoryFilters = () => {
+    if (state.show_category_filters) {
+      dispatch({ type: HIDE_CATEGORY_FILTERS });
+    } else {
+      dispatch({ type: SHOW_CATEGORY_FILTERS });
+    }
+  }
+
+  const togglePriceFilters = () => {
+    if (state.show_price_filters) {
+      dispatch({ type: HIDE_PRICE_FILTERS });
+    } else {
+      dispatch({ type: SHOW_PRICE_FILTERS });
+    }
+  }
+
+  const toggleArtistFilters = () => {
+    if (state.show_artist_filters) {
+      dispatch({ type: HIDE_ARTIST_FILTERS });
+    } else {
+      dispatch({ type: SHOW_ARTIST_FILTERS });
+    }
+  }
+
+  const toggleYearFilters = () => {
+    if (state.show_year_filters) {
+      dispatch({ type: HIDE_YEAR_FILTERS });
+    } else {
+      dispatch({ type: SHOW_YEAR_FILTERS });
+    }
+  }
+
   useEffect(() => {
-    dispatch({ type: LOAD_PRODUCTS, payload: products })
+    console.log(products);
+    dispatch({ type: LOAD_PRODUCTS, payload: products });
   }, [products]);
 
   useEffect(() => {
-    dispatch({ type: FILTER_PRODUCTS })
-    dispatch({ type: SORT_PRODUCTS })
+    dispatch({ type: FILTER_PRODUCTS });
+    dispatch({ type: SORT_PRODUCTS });
   }, [products, state.sort, state.filters])
 
   return (
     <FilterContext.Provider value={{
       ...state,
       updateSort,
+      toggleCategoryFilters,
+      togglePriceFilters,
+      toggleArtistFilters,
+      toggleYearFilters,
       updateFilters
     }}>
       {children}

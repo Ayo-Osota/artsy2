@@ -1377,29 +1377,65 @@ p {
   grid-template-columns: auto 1fr;
   margin-top: 8.875rem;
   padding-bottom: 18.75rem;
+  gap: 2.6875rem;
+  align-items: flex-start;
 }
 
 .filter {
   --flow-spacer: 1rem;
   flex-direction: column;
   align-items: flex-start;
-  border: solid red;
   justify-content: flex-start;
+}
+
+.filter-heading {
+  gap: 1.5625rem;
+  margin-top: 7rem;
+}
+
+.filter-btn {
+  display: flex;
+  align-items: center;
+  width: 100%;
+  background: none;
+  border: none;
+  cursor: pointer;
 }
 
 .form-control__search {
   background: #F4F2F2;
   border-radius: 15px;
   display: flex;
-  gap: 0.875rem;
   padding: 1rem 1.75rem;
   width: 215px;
+}
+
+.form-control {
+  --flow-spacer: 1.25rem;
+  display: flex;
+  flex-direction: column;
+  max-height: 0;
+  /* transform: scaleY(0); */
+  /* transform-origin: top; */
+  overflow: hidden;
+  transition: max-height 0.3s;
 }
 
 .form-control__category {
   --flow-spacer: 1.25rem;
   display: flex;
   flex-direction: column;
+  max-height: 0;
+  /* transform: scaleY(0); */
+  /* transform-origin: top; */
+  overflow: hidden;
+  transition: max-height 0.5s;
+}
+
+.active {
+  /* transform: scaleY(1); */
+  max-height: 500px;
+  /* display: flex; */
 }
 
 .form-control__category label {
@@ -1408,14 +1444,13 @@ p {
 
 .form-control__category label span:last-child {
   margin-left: 2rem;
+  text-transform: capitalize;
 }
 
 input[type="checkbox"] {
   opacity: 0;
   cursor: pointer;
 }
-
-
 
 .checkmark {
   position: absolute;
@@ -1447,8 +1482,15 @@ input[type="checkbox"]:checked~.checkmark:after {
   display: block;
 }
 
-input[name="search"] {
+input[name="text"] {
+  width: 100%;
+  padding-left: 0.875rem;
   border: none;
+  background-color: transparent;
+}
+
+input[name="text"]:focus {
+  outline: none;
   background-color: transparent;
 }
 
@@ -1459,6 +1501,23 @@ input[name="search"] {
   align-self: stretch;
 }
 
+.sort-wrapper {
+  align-items: center;
+  background: #FFFFFF;
+  box-shadow: 4px 4px 64px rgba(0, 0, 0, 0.1);
+  border-radius: 15px;
+  padding: 1rem;
+  padding-left: 1.875rem;
+  margin-top: -0.5rem;
+}
+
+.sort-input {
+  width: 191px;
+  height: 58px;
+  border: 0.4px solid #000000;
+  border-radius: 8px;
+}
+
 .products-list-wrapper {
   display: flex;
   flex-direction: column;
@@ -1467,10 +1526,16 @@ input[name="search"] {
 
 .products-list {
   --flow-spacer: 0.625rem;
+  margin-top: 5.5625rem;
   display: flex;
   flex-wrap: wrap;
+  align-self: flex-start;
   gap: 53px;
   padding-bottom: 10.4375rem;
+}
+
+.products-list::-webkit-scrollbar {
+  display: none;
 }
 
 .product-card {

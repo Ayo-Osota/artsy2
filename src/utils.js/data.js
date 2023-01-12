@@ -140,6 +140,8 @@ const events = [
     }
 ]
 
+const categories = ["editorials", "fashion", "optics", "art & museum", "nature"]
+
 const products_url = 'https://gist.githubusercontent.com/eniiku/65a95533de1f005eee35d5eb91f3e141/raw/439bc2dd8693b490539eae236918f4a53dd17457/products.json';
 
-export {links, carouselImages, navIcons, midNavs, events, products_url, pfpImages}
+export {links, carouselImages, navIcons, midNavs, events, products_url, pfpImages, categories}
